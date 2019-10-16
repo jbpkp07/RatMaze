@@ -19,9 +19,18 @@ class RatMaze implements IRatMaze {
 
     private hasFinished: boolean = false;
 
-    public constructor(mapFileName: string) {
+    public constructor(mapFileName: string, mazeWidth?: number, mazeHeight?: number) {
 
         this.map = require(`./maps/${mapFileName}`);
+
+        if (typeof mazeWidth === "number" && typeof mazeHeight === "number") {
+
+            this.map.mazeWidth = mazeWidth;
+            this.map.mazeHeight = mazeHeight;
+
+            this.map.endLocation.xCoord = mazeWidth - 1;
+            this.map.endLocation.yCoord = mazeHeight - 1;
+        }
 
         this.playerLocation = {
 
@@ -54,7 +63,7 @@ class RatMaze implements IRatMaze {
 
                         resolveInner();
 
-                    }, count * 500);
+                    }, count * 250);
                 });
 
                 allPromises.push(promise);
@@ -81,9 +90,9 @@ class RatMaze implements IRatMaze {
         }
 
         this.solveMazeAttempt();
-  
+
         if (this.optimizedPath.length === 0) { // unsolveable map
-          
+
             this.solveMaze(); // try another random map that is solveable
         }
 
@@ -142,8 +151,8 @@ class RatMaze implements IRatMaze {
 
         let nextLocation: IMazeLocation;
 
-        // move up ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord - 1);
+        // move down ------------------------------------------------------------
+        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord + 1);
 
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
 
@@ -158,8 +167,8 @@ class RatMaze implements IRatMaze {
             this.solveMazeAttempt(nextLocation);
         }
 
-        // move down ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord + 1);
+        // move up ------------------------------------------------------------
+        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord - 1);
 
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
 

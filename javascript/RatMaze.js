@@ -2,13 +2,19 @@ const terminal = require("terminal-kit").terminal;
 const Table = require("cli-table");
 const VisitedLocation = require("./VisitedLocation.js");
 class RatMaze {
-    constructor(mapFileName) {
+    constructor(mapFileName, mazeWidth, mazeHeight) {
         this.visitedLocations = [];
         this.allMazeLocations = [];
         this.traveledPath = [];
         this.optimizedPath = [];
         this.hasFinished = false;
         this.map = require(`./maps/${mapFileName}`);
+        if (typeof mazeWidth === "number" && typeof mazeHeight === "number") {
+            this.map.mazeWidth = mazeWidth;
+            this.map.mazeHeight = mazeHeight;
+            this.map.endLocation.xCoord = mazeWidth - 1;
+            this.map.endLocation.yCoord = mazeHeight - 1;
+        }
         this.playerLocation = {
             isPlayer: true,
             xCoord: this.map.startLocation.xCoord,
@@ -27,7 +33,7 @@ class RatMaze {
                         this.playerLocation.yCoord = location.yCoord;
                         this.printMazeOnce();
                         resolveInner();
-                    }, count * 500);
+                    }, count * 250);
                 });
                 allPromises.push(promise);
                 count++;
@@ -81,8 +87,8 @@ class RatMaze {
             return;
         }
         let nextLocation;
-        // move up ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord - 1);
+        // move down ------------------------------------------------------------
+        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord + 1);
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
@@ -91,8 +97,8 @@ class RatMaze {
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
-        // move down ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord + 1);
+        // move up ------------------------------------------------------------
+        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord - 1);
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
