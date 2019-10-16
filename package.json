@@ -1,0 +1,21 @@
+{
+  "name": "ratmaze",
+  "version": "1.0.0",
+  "description": "Rat Maze Whiteboard Test",
+  "main": "index.js",
+  "scripts": { },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbpkp07/RatMaze.git"
+  },
+  "author": "Jeremy Barnes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbpkp07/RatMaze/issues"
+  },
+  "homepage": "https://github.com/jbpkp07/RatMaze#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "terminal-kit": "^1.31.4"
+  }
+}
