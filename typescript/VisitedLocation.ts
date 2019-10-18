@@ -1,4 +1,4 @@
-class VisitedLocation implements IMazeLocation {
+export class VisitedLocation implements IMazeLocation {
 
     public xCoord: number;
     public yCoord: number;
@@ -9,5 +9,3 @@ class VisitedLocation implements IMazeLocation {
         this.yCoord = yCoord;
     }
 }
-
-module.exports = VisitedLocation;

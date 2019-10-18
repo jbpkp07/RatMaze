@@ -1,6 +1,11 @@
-const terminal = require("terminal-kit").terminal;
-const Table = require("cli-table");
-const VisitedLocation = require("./VisitedLocation.js");
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const cli_table_1 = __importDefault(require("cli-table"));
+const terminal_kit_1 = require("terminal-kit");
+const VisitedLocation_js_1 = require("./VisitedLocation.js");
 class RatMaze {
     constructor(mapFileName, mazeWidth, mazeHeight) {
         this.visitedLocations = [];
@@ -44,7 +49,7 @@ class RatMaze {
         });
     }
     solveMaze() {
-        if (this.map.randomizeMap) {
+        if ("randomizeMap" in this.map) {
             this.visitedLocations = [];
             this.randomizeMap();
             this.printMazeOnce();
@@ -78,7 +83,7 @@ class RatMaze {
         }
     }
     solveMazeAttempt(currentPosition = this.playerLocation) {
-        const currentLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord);
+        const currentLocation = new VisitedLocation_js_1.VisitedLocation(currentPosition.xCoord, currentPosition.yCoord);
         this.traveledPath.push(currentLocation);
         this.visitedLocations.push(currentLocation);
         if (currentPosition.xCoord === this.map.endLocation.xCoord && currentPosition.yCoord === this.map.endLocation.yCoord) {
@@ -88,22 +93,22 @@ class RatMaze {
         }
         let nextLocation;
         // move down ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord + 1);
+        nextLocation = new VisitedLocation_js_1.VisitedLocation(currentPosition.xCoord, currentPosition.yCoord + 1);
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
         // move right ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord + 1, currentPosition.yCoord);
+        nextLocation = new VisitedLocation_js_1.VisitedLocation(currentPosition.xCoord + 1, currentPosition.yCoord);
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
         // move up ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord, currentPosition.yCoord - 1);
+        nextLocation = new VisitedLocation_js_1.VisitedLocation(currentPosition.xCoord, currentPosition.yCoord - 1);
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
         // move left ------------------------------------------------------------
-        nextLocation = new VisitedLocation(currentPosition.xCoord - 1, currentPosition.yCoord);
+        nextLocation = new VisitedLocation_js_1.VisitedLocation(currentPosition.xCoord - 1, currentPosition.yCoord);
         if (!this.hasFinished && this.canTravelToLocation(nextLocation)) {
             this.solveMazeAttempt(nextLocation);
         }
@@ -113,7 +118,7 @@ class RatMaze {
     }
     printMazeOnce() {
         this.updateAllMazeLocations();
-        terminal.restoreCursor();
+        terminal_kit_1.terminal.restoreCursor();
         const tableData = [];
         const colAligns = ["middle"];
         let tableRow = [];
@@ -148,11 +153,11 @@ class RatMaze {
             colAligns,
             style: { "padding-left": 1, "padding-right": 1, "border": ["cyan"], compact }
         };
-        const table = new Table(tableConfigObj);
+        const table = new cli_table_1.default(tableConfigObj);
         tableData.forEach((row) => table.push(row));
         const tableSTR = table.toString();
         const tableSTRIndented = `    ${tableSTR.replace(/\n/g, "\n    ")}\n\n`;
-        terminal(tableSTRIndented);
+        terminal_kit_1.terminal(tableSTRIndented);
     }
     updateAllMazeLocations() {
         this.map.occupiedLocations.push(this.playerLocation, this.map.startLocation, this.map.endLocation);
@@ -192,7 +197,7 @@ class RatMaze {
             return false;
         }
         locationToCheck = this.visitedLocations.find(predicate);
-        if (typeof locationToCheck !== "undefined") {
+        if (locationToCheck) {
             return false;
         }
         return true;
@@ -215,9 +220,9 @@ class RatMaze {
         this.optimizedPath = this.traveledPath;
     }
     prepareConsole() {
-        terminal.reset();
-        terminal("\n\n");
-        terminal.saveCursor();
+        terminal_kit_1.terminal.reset();
+        terminal_kit_1.terminal("\n\n");
+        terminal_kit_1.terminal.saveCursor();
     }
 }
-module.exports = RatMaze;
+exports.RatMaze = RatMaze;

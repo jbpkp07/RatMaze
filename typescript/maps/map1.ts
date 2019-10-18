@@ -36,7 +36,7 @@ const occupiedLocations: IMazeLocation[] = [
     { isOccupied: true, xCoord: 5, yCoord: 5 }
 ];
 
-const map: IMap = {
+export const map: IMap = {
     mazeWidth,
     mazeHeight,
     startLocation,
@@ -44,5 +44,4 @@ const map: IMap = {
     occupiedLocations
 };
 
-export {};
 module.exports = map;

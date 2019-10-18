@@ -1,9 +1,10 @@
-const terminal: any = require("terminal-kit").terminal;
-const Table: any = require("cli-table");
-const VisitedLocation: any = require("./VisitedLocation.js");
+import Table from "cli-table";
+import { terminal } from "terminal-kit";
+
+import { VisitedLocation } from "./VisitedLocation.js";
 
 
-class RatMaze implements IRatMaze {
+export class RatMaze {
 
     private readonly map: IMap;
 
@@ -44,7 +45,7 @@ class RatMaze implements IRatMaze {
 
     public async printMazeTraversal(): Promise<null> {
 
-        const allPromises: any = [];
+        const allPromises: Promise<void>[] = [];
 
         return new Promise((resolve: Function): void => {
 
@@ -52,7 +53,7 @@ class RatMaze implements IRatMaze {
 
             for (const location of this.optimizedPath) {
 
-                const promise: Promise<null> = new Promise((resolveInner: Function): void => {
+                const promise: Promise<void> = new Promise((resolveInner: Function): void => {
 
                     setTimeout(() => {
 
@@ -80,7 +81,7 @@ class RatMaze implements IRatMaze {
 
     public solveMaze(): IMazeLocation[] {
 
-        if (this.map.randomizeMap) {
+        if ("randomizeMap" in this.map) {
 
             this.visitedLocations = [];
 
@@ -246,7 +247,7 @@ class RatMaze implements IRatMaze {
             style: { "padding-left": 1, "padding-right": 1, "border": ["cyan"], compact }
         };
 
-        const table: any = new Table(tableConfigObj);
+        const table: Table = new Table(tableConfigObj);
 
         tableData.forEach((row: string[]) => table.push(row));
 
@@ -266,7 +267,7 @@ class RatMaze implements IRatMaze {
         let xCoord: number;
         let yCoord: number;
 
-        const predicate: (location: IMazeLocation) => {} = (location: IMazeLocation): boolean => location.xCoord === xCoord && location.yCoord === yCoord;
+        const predicate: any = (location: IMazeLocation): boolean => location.xCoord === xCoord && location.yCoord === yCoord;
 
         for (yCoord = 0; yCoord < this.map.mazeHeight; yCoord++) {
 
@@ -308,8 +309,7 @@ class RatMaze implements IRatMaze {
             this.updateAllMazeLocations();
         }
 
-        const predicate: (location: IMazeLocation) => {} =
-            (location: IMazeLocation): boolean => location.xCoord === nextLocation.xCoord && location.yCoord === nextLocation.yCoord;
+        const predicate: any = (location: IMazeLocation): boolean => location.xCoord === nextLocation.xCoord && location.yCoord === nextLocation.yCoord;
 
         let locationToCheck: any = this.allMazeLocations.find(predicate);
 
@@ -320,7 +320,7 @@ class RatMaze implements IRatMaze {
 
         locationToCheck = this.visitedLocations.find(predicate);
 
-        if (typeof locationToCheck !== "undefined") {
+        if (locationToCheck) {
 
             return false;
         }
@@ -364,6 +364,3 @@ class RatMaze implements IRatMaze {
         terminal.saveCursor();
     }
 }
-
-export { };
-module.exports = RatMaze;

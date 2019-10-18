@@ -17,7 +17,7 @@ const endLocation: IMazeLocation = {
 
 const occupiedLocations: IMazeLocation[] = [];
 
-const map: IMap = {
+export const map: IMap = {
     mazeWidth,
     mazeHeight,
     startLocation,
@@ -26,5 +26,4 @@ const map: IMap = {
     randomizeMap: true
 };
 
-export {};
 module.exports = map;

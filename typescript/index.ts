@@ -1,15 +1,28 @@
-type RatMaze = new(mapFileName: string, mazeWidth?: number, mazeHeight?: number) => IRatMaze;
+import fs from "fs";
+import process from "process";
+import { terminal } from "terminal-kit";
 
-const RatMaze: RatMaze = require("./RatMaze.js");
-const terminal: any = require("terminal-kit").terminal;
+import { RatMaze } from "./RatMaze.js";
 
 const mapFileName: string = process.argv[2];
 const mazeWidth: number = parseInt(process.argv[3]);
 const mazeHeight: number = parseInt(process.argv[4]);
 
-let ratMaze: IRatMaze;
+if (!fs.existsSync(`./maps/${mapFileName}.js`)) {
 
-if (mazeHeight && mazeHeight) {
+    terminal.red("\n\n");
+    terminal.red("  You did not provide a map name argument. Please choose from:").cyan("  \"map1\", \"map2\", \"map3\"\n\n");
+    terminal.white("  Example:  ").cyan("node index.js map2\n\n");
+    terminal.white("  You can also supply a custom size to ").cyan("map3\n");
+    terminal.white("  Syntax:   node index.js map3 <width> <height>\n");
+    terminal.white("  Example:  ").cyan("node index.js map3 12 18\n\n");
+   
+    process.exit(0);
+}
+
+let ratMaze: RatMaze;
+
+if (mazeHeight > 2 && mazeHeight > 2) {
 
     ratMaze = new RatMaze(mapFileName, mazeWidth, mazeHeight);
 }

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const mazeWidth = 6;
 const mazeHeight = 6;
 const startLocation = {
@@ -25,11 +27,11 @@ const occupiedLocations = [
     { isOccupied: true, xCoord: 4, yCoord: 4 },
     { isOccupied: true, xCoord: 4, yCoord: 5 }
 ];
-const map = {
+exports.map = {
     mazeWidth,
     mazeHeight,
     startLocation,
     endLocation,
     occupiedLocations
 };
-module.exports = map;
+module.exports = exports.map;
