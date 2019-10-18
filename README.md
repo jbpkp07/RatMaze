@@ -27,7 +27,7 @@ I am the sole developer of this application.
 
 ### Screenshots:
 
-#### The rat traversing throught the maze (S=start  E=end  ▲=rat  ■=wall)
+#### The rat traversing throught the maze (S=start    E=end    ▲=rat    ■=wall)
 
 ![1](https://github.com/jbpkp07/RatMaze/blob/master/images/inAction.png)
 
