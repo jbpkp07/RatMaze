@@ -27,10 +27,10 @@ I am the sole developer of this application.
 
 ### Screenshots:
 
-#### Locally running webserver:
+#### The rat traversing throught the maze (S=start  E=end  ▲=rat  ■=wall)
 
 ![1](https://github.com/jbpkp07/RatMaze/blob/master/images/inAction.png)
 
-#### Hosted website:
+#### Completed maze and coordinates console logged
 
 ![2](https://github.com/jbpkp07/RatMaze/blob/master/images/completed.png)
