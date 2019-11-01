@@ -2,7 +2,7 @@ import fs from "fs";
 import process from "process";
 import { terminal } from "terminal-kit";
 
-import { RatMaze } from "./typescript/RatMaze";
+import { RatMaze } from "./RatMaze";
 
 const mapFileName: string = process.argv[2];
 const mazeWidth: number = parseInt(process.argv[3]);

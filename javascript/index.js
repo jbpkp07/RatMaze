@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const process_1 = __importDefault(require("process"));
 const terminal_kit_1 = require("terminal-kit");
-const RatMaze_1 = require("./typescript/RatMaze");
+const RatMaze_1 = require("./RatMaze");
 const mapFileName = process_1.default.argv[2];
 const mazeWidth = parseInt(process_1.default.argv[3]);
 const mazeHeight = parseInt(process_1.default.argv[4]);
