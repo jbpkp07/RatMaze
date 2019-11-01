@@ -1,4 +1,4 @@
-# RatMaze
+# RatMaze-Typescript
 
 This is a Node.js application that solves a rat maze using a depth-first search algorithm. It will output a traversal of the rat through the maze to the console, followed by console logging the coordinates of the path the rat took.
 
