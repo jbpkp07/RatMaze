@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const process_1 = __importDefault(require("process"));
 const terminal_kit_1 = require("terminal-kit");
-const RatMaze_js_1 = require("./RatMaze.js");
+const RatMaze_1 = require("./typescript/RatMaze");
 const mapFileName = process_1.default.argv[2];
 const mazeWidth = parseInt(process_1.default.argv[3]);
 const mazeHeight = parseInt(process_1.default.argv[4]);
@@ -21,10 +21,10 @@ if (!fs_1.default.existsSync(`./maps/${mapFileName}.js`)) {
 }
 let ratMaze;
 if (mazeHeight > 2 && mazeHeight > 2) {
-    ratMaze = new RatMaze_js_1.RatMaze(mapFileName, mazeWidth, mazeHeight);
+    ratMaze = new RatMaze_1.RatMaze(mapFileName, mazeWidth, mazeHeight);
 }
 else {
-    ratMaze = new RatMaze_js_1.RatMaze(mapFileName);
+    ratMaze = new RatMaze_1.RatMaze(mapFileName);
 }
 const optimizedPath = ratMaze.solveMaze();
 ratMaze.printMazeTraversal().then(() => {

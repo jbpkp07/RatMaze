@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const process_1 = __importDefault(require("process"));
 const terminal_kit_1 = require("terminal-kit");
-const RatMaze_js_1 = require("./javascript/RatMaze.js");
+const RatMaze_js_1 = require("./js/RatMaze.js");
 const mapFileName = process_1.default.argv[2];
 const mazeWidth = parseInt(process_1.default.argv[3]);
 const mazeHeight = parseInt(process_1.default.argv[4]);
-if (!fs_1.default.existsSync(`./javascript/maps/${mapFileName}.js`)) {
+if (!fs_1.default.existsSync(`./js/maps/${mapFileName}.js`)) {
     terminal_kit_1.terminal.red("\n\n");
     terminal_kit_1.terminal.red("  You did not provide a map name argument. Please choose from:").cyan("  \"map1\", \"map2\", \"map3\"\n\n");
     terminal_kit_1.terminal.white("  Example:  ").cyan("node index.js map2\n\n");
