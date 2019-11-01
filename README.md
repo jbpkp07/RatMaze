@@ -10,16 +10,16 @@ You can clone this repository via command line (if you have Git installed) by ty
 
 If you already have Node installed, open your terminal, and browse to where you have cloned this Git repository and type:  
 
-`node index <map>`
+`node index.js <map>`
 
 Maps available:  `map1`, `map2`, `map3`
 
 If you choose `map3` specifically, you can also provide custom map dimensions using this syntax:
-`node index map3 <width> <height>`   Example:   `node index map3 12 18`
+`node index.js map3 <width> <height>`   Example:   `node index.js map3 12 18`
 
 If there are Node module dependencies that you are missing, please type `npm install` and it will reference the package.json file in this repository to automatically resolve those missing dependencies.
 
-The main entry point for the server application is `index`, and the other auxillary files are used to provide Node modules that the application depends on.
+The main entry point for the server application is `index.js`, and the other auxillary files are used to provide Node modules that the application depends on.
 
 **Technologies used:**  Node, Typescript, Javascript, NPM, npm terminal-kit, npm cli-table
 
